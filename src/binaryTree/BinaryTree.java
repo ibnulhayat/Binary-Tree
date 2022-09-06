@@ -70,19 +70,22 @@ public class BinaryTree implements Tree {
         return left + right + root.data;
     }
 
+    /** we are implement Breadth First Search(BFS) find the level of sum
+     * this approach are very easy
+     * */
     public int levelOfSum(Node root, int level){
         int sum = 0;
         Queue<Node> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()){
-            int size = queue.size();
-            --level;
-            while (size--> 0) {
-                Node node = queue.poll();
+        queue.add(root);                // firstly add the main root in queue
+        while (!queue.isEmpty()){       // we are checking until queue is not empty
+            int size = queue.size();    // we are get the first queue size or number of node in a level
+            --level;    // we want to be specific level of sum, so decrement the value
+            while (size--> 0) {   // we get the all node until is zero
+                Node node = queue.poll(); // we are polling all storing node, all node are level wise node
                 assert node != null;
-                if (level == 0) sum += node.data;
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
+                if (level == 0) sum += node.data; // when level equal zero that's mean we are find the specific level, we want to sum all node value in this level
+                if (node.left != null) queue.add(node.left); // we are adding node in queue until node left side equal not null
+                if (node.right != null) queue.add(node.right); // we are adding node in queue until node right side equal not null
             }
         }
         return sum;
